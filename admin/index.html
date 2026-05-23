@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MYSTUDIES - لوحة التحكم</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+      <div class="login-box">
+        <div class="login-logo">MYSTUDIES</div>
+        <h2>تسجيل الدخول</h2>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+            <input type="email" id="loginEmail" required placeholder="admin@mystudies.ma">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> كلمة المرور</label>
+            <input type="password" id="loginPassword" required placeholder="••••••">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
+            <i class="fas fa-sign-in-alt"></i> دخول
+          </button>
+          <p class="login-error" id="loginError"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display:none">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="logo-icon" style="background:var(--accent);color:var(--gray-900)">M</div>
+          <span>MY<span style="color:var(--accent)">STUDIES</span></span>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="active" onclick="navigateAdmin('dashboard')"><i class="fas fa-chart-bar"></i> لوحة الإحصائيات</a>
+          <a onclick="navigateAdmin('news')"><i class="fas fa-newspaper"></i> الأخبار</a>
+          <a onclick="navigateAdmin('categories')"><i class="fas fa-tags"></i> التصنيفات</a>
+          <a onclick="navigateAdmin('contacts')"><i class="fas fa-envelope"></i> الرسائل</a>
+          <a onclick="navigateAdmin('subscribers')"><i class="fas fa-users"></i> المشتركون</a>
+          <a onclick="navigateAdmin('rss')"><i class="fas fa-rss"></i> RSS</a>
+          <a onclick="navigateAdmin('profile')"><i class="fas fa-user-cog"></i> الملف الشخصي</a>
+          <hr style="border-color:var(--gray-700);margin:16px 0">
+          <a href="/" target="_blank"><i class="fas fa-external-link-alt"></i> زيارة الموقع</a>
+          <a onclick="handleLogout()" style="color:var(--danger)"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+        </nav>
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar" id="adminAvatar">A</div>
+          <div>
+            <div class="sidebar-user-name" id="adminName">مدير</div>
+            <div class="sidebar-user-role" id="adminRole">admin</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Area -->
+      <main class="admin-main">
+        <header class="admin-header">
+          <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+          <h2 id="pageTitle">لوحة الإحصائيات</h2>
+          <div style="flex:1"></div>
+          <button class="btn btn-primary" onclick="navigateAdmin('news');openNewsEditor()" style="font-size:13px;padding:8px 16px">
+            <i class="fas fa-plus"></i> خبر جديد
+          </button>
+        </header>
+        <div class="admin-content" id="adminContent"></div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MYSTUDIES - منصة تعليمية وأخبارية للطلاب: أخبار التعليم، المنح الدراسية، مباريات التوظيف، فرص التدريب والتوجيه الدراسي">
+  <meta name="keywords" content="أخبار التعليم, منح دراسية, مباريات التوظيف, تدريب, توجيه دراسي, المغرب, طلاب">
+  <meta name="author" content="MYSTUDIES">
+  <meta property="og:title" content="MYSTUDIES - منصة الطالب المتكاملة">
+  <meta property="og:description" content="أخبار التعليم، المنح الدراسية، مباريات التوظيف، والتوجيه الدراسي">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>MYSTUDIES - منصة الطالب المتكاملة</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a56db'/%3E%3Ctext x='50' y='65' text-anchor='middle' fill='white' font-size='50' font-weight='bold' font-family='Arial'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <div class="logo" onclick="navigateTo('home')">
+        <div class="logo-icon">M</div>
+        <span>MY</span>STUDIES
+      </div>
+      <nav class="nav" id="mainNav">
+        <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="#" data-page="education"><i class="fas fa-graduation-cap"></i> أخبار التعليم</a>
+        <a href="#" data-page="scholarships"><i class="fas fa-award"></i> المنح الدراسية</a>
+        <a href="#" data-page="jobs"><i class="fas fa-briefcase"></i> مباريات التوظيف</a>
+        <a href="#" data-page="internships"><i class="fas fa-laptop-code"></i> فرص التدريب</a>
+        <a href="#" data-page="guidance"><i class="fas fa-compass"></i> التوجيه الدراسي</a>
+        <a href="#" data-page="contact"><i class="fas fa-envelope"></i> تواصل معنا</a>
+      </nav>
+      <div class="header-actions">
+        <button class="search-btn" onclick="toggleSearch()" aria-label="بحث">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="القائمة">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Categories Strip -->
+  <div class="categories-strip" id="catStrip">
+    <div class="cat-strip-inner">
+      <span class="cat-strip-item active" onclick="filterCategory('all')"><i class="fas fa-th-large"></i> الكل</span>
+      <span class="cat-strip-item" onclick="filterCategory('education')"><i class="fas fa-graduation-cap"></i> تعليم</span>
+      <span class="cat-strip-item" onclick="filterCategory('scholarship')"><i class="fas fa-award"></i> منح</span>
+      <span class="cat-strip-item" onclick="filterCategory('job')"><i class="fas fa-briefcase"></i> وظائف</span>
+      <span class="cat-strip-item" onclick="filterCategory('internship')"><i class="fas fa-laptop-code"></i> تدريب</span>
+      <span class="cat-strip-item" onclick="filterCategory('guidance')"><i class="fas fa-compass"></i> توجيه</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>منصتك المتكاملة <span>للطلاب</span></h1>
+        <p>أخبار التعليم، المنح الدراسية، مباريات التوظيف، فرص التدريب، ونصائح التوجيه الدراسي في مكان واحد</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary" onclick="navigateTo('education')"><i class="fas fa-graduation-cap"></i> أحدث الأخبار</a>
+          <a href="#" class="btn btn-outline" onclick="navigateTo('scholarships')"><i class="fas fa-award"></i> المنح الدراسية</a>
+        </div>
+      </div>
+      <div class="hero-featured" id="heroFeatured">
+        <span class="hero-featured-label"><i class="fas fa-star"></i> أهم الأخبار اليوم</span>
+        <h3 id="heroFeaturedTitle">جاري تحميل آخر الأخبار...</h3>
+        <p id="heroFeaturedExcerpt"></p>
+        <div class="hero-featured-meta">
+          <span><i class="far fa-calendar"></i> <span id="heroFeaturedDate"></span></span>
+          <span><i class="far fa-folder"></i> <span id="heroFeaturedCat"></span></span>
+        </div>
+        <button class="btn btn-white" onclick="openArticle(0)"><i class="fas fa-arrow-left"></i> اقرأ المزيد</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Header Ad -->
+  <div class="ad-container ad-header" style="max-width:1280px;margin:0 auto;padding:8px 24px;"></div>
+
+  <!-- Main Content -->
+  <main class="main" id="mainContent">
+
+    <!-- Home Section -->
+    <div id="page-home" class="category-page active">
+
+      <!-- Latest News -->
+      <div class="section-header">
+        <h2 class="section-title">أحدث الأخبار</h2>
+        <a class="section-more" href="#" onclick="navigateTo('education')">عرض الكل <i class="fas fa-arrow-left"></i></a>
+      </div>
+      <div class="news-grid featured-grid" id="newsGrid">
+        <!-- Rendered by JS -->
+      </div>
+      <!-- In-content Ad -->
+      <div class="ad-container ad-inarticle" style="max-width:728px;margin:24px auto;"></div>
+
+      <!-- AI Suggestions -->
+      <div style="margin: 48px 0 24px;">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fas fa-robot" style="color: var(--accent); margin-left: 8px;"></i> اقتراحات ذكية لك</h2>
+          <a class="section-more" style="color: var(--accent);" href="#" onclick="navigateTo('guidance')">اكتشف المزيد <i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: var(--radius-lg); padding: 32px;">
+          <div class="news-grid" id="aiSuggestions">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div style="margin: 48px 0;">
+        <div class="section-header">
+          <h2 class="section-title">منصة MYSTUDIES بالأرقام</h2>
+        </div>
+        <div class="stats-inner" style="padding: 0;">
+          <div class="stat-item">
+            <div class="stat-icon"><i class="fas fa-newspaper"></i></div>
+            <div class="stat-number" data-target="1250">0</div>
+            <div class="stat-label">خبر منشور</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon accent"><i class="fas fa-award"></i></div>
+            <div class="stat-number" data-target="340">0</div>
+            <div class="stat-label">منحة دراسية</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon success"><i class="fas fa-briefcase"></i></div>
+            <div class="stat-number" data-target="520">0</div>
+            <div class="stat-label">مباراة توظيف</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+            <div class="stat-number" data-target="15000">0</div>
+            <div class="stat-label">طالب مستفيد</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Pages -->
+    <div id="page-education" class="category-page">
+      <div class="category-header">
+        <div>
+          <h2><i class="fas fa-graduation-cap"></i> أخبار التعليم</h2>
+          <p>آخر أخبار التعليم والمستجدات الدراسية في المغرب والعالم</p>
+        </div>
+        <div class="filter-bar" id="filterEducation">
+          <button class="filter-btn active" onclick="filterSubCategory('education', 'all')">الكل</button>
+          <button class="filter-btn" onclick="filterSubCategory('education', 'جامعات')">جامعات</button>
+          <button class="filter-btn" onclick="filterSubCategory('education', 'مدارس')">مدارس</button>
+          <button class="filter-btn" onclick="filterSubCategory('education', 'امتحانات')">امتحانات</button>
+        </div>
+      </div>
+      <div class="news-grid" id="educationGrid"></div>
+    </div>
+
+    <div id="page-scholarships" class="category-page">
+      <div class="category-header">
+        <div>
+          <h2><i class="fas fa-award"></i> المنح الدراسية</h2>
+          <p>فرص المنح الدراسية داخل المغرب وخارجه</p>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterSubCategory('scholarships', 'all')">الكل</button>
+          <button class="filter-btn" onclick="filterSubCategory('scholarships', 'داخل المغرب')">داخل المغرب</button>
+          <button class="filter-btn" onclick="filterSubCategory('scholarships', 'خارج المغرب')">خارج المغرب</button>
+          <button class="filter-btn" onclick="filterSubCategory('scholarships', 'ممولة بالكامل')">ممولة بالكامل</button>
+        </div>
+      </div>
+      <div class="news-grid" id="scholarshipsGrid"></div>
+    </div>
+
+    <div id="page-jobs" class="category-page">
+      <div class="category-header">
+        <div>
+          <h2><i class="fas fa-briefcase"></i> مباريات التوظيف</h2>
+          <p>مباريات التوظيف في الوظائف العمومية والقطاع الخاص</p>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterSubCategory('jobs', 'all')">الكل</button>
+          <button class="filter-btn" onclick="filterSubCategory('jobs', 'عمومي')">قطاع عمومي</button>
+          <button class="filter-btn" onclick="filterSubCategory('jobs', 'خاص')">قطاع خاص</button>
+        </div>
+      </div>
+      <div class="news-grid" id="jobsGrid"></div>
+    </div>
+
+    <div id="page-internships" class="category-page">
+      <div class="category-header">
+        <div>
+          <h2><i class="fas fa-laptop-code"></i> فرص التدريب</h2>
+          <p>فرص التدريب المهني والصيفي للطلاب والخريجين</p>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterSubCategory('internships', 'all')">الكل</button>
+          <button class="filter-btn" onclick="filterSubCategory('internships', 'صيفي')">تدريب صيفي</button>
+          <button class="filter-btn" onclick="filterSubCategory('internships', 'مهني')">تدريب مهني</button>
+        </div>
+      </div>
+      <div class="news-grid" id="internshipsGrid"></div>
+    </div>
+
+    <div id="page-guidance" class="category-page">
+      <div class="category-header">
+        <div>
+          <h2><i class="fas fa-compass"></i> التوجيه الدراسي</h2>
+          <p>نصائح وإرشادات للتوجيه الدراسي والمهني</p>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterSubCategory('guidance', 'all')">الكل</button>
+          <button class="filter-btn" onclick="filterSubCategory('guidance', 'مسارات')">المسارات الدراسية</button>
+          <button class="filter-btn" onclick="filterSubCategory('guidance', 'نصائح')">نصائح</button>
+        </div>
+      </div>
+      <div class="news-grid" id="guidanceGrid"></div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="page-contact" class="category-page">
+      <div class="contact-section">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h2>تواصل معنا</h2>
+            <p>نحن هنا للإجابة على استفساراتك ومساعدتك. لا تتردد في التواصل معنا!</p>
+            <div class="contact-cards">
+              <div class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                  <h4>البريد الإلكتروني</h4>
+                  <p>contact@mystudies.ma</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-phone"></i></div>
+                <div>
+                  <h4>الهاتف</h4>
+                  <p>+212 5XX-XXXXXX</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                  <h4>العنوان</h4>
+                  <p>الرباط، المغرب</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                  <h4>ساعات العمل</h4>
+                  <p>الإثنين - الجمعة: 9:00 - 18:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form-wrap">
+            <h3>أرسل لنا رسالة</h3>
+            <form id="contactForm" onsubmit="handleContactSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName">الاسم الكامل</label>
+                  <input type="text" id="contactName" required placeholder="أدخل اسمك">
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">البريد الإلكتروني</label>
+                  <input type="email" id="contactEmail" required placeholder="أدخل بريدك">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contactSubject">الموضوع</label>
+                <select id="contactSubject">
+                  <option value="استفسار">استفسار</option>
+                  <option value="اقتراح">اقتراح</option>
+                  <option value="شكوى">شكوى</option>
+                  <option value="أخرى">أخرى</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contactMessage">الرسالة</label>
+                <textarea id="contactMessage" required placeholder="اكتب رسالتك هنا..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <i class="fas fa-paper-plane"></i> إرسال الرسالة
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="newsletter-inner">
+      <h2>اشترك في نشرتنا البريدية</h2>
+      <p>احصل على أحدث الأخبار والمنح والتوجيهات مباشرة في بريدك الإلكتروني</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" required placeholder="أدخل بريدك الإلكتروني">
+        <button type="submit">اشتراك</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-about">
+        <div class="logo">
+          <div class="logo-icon">M</div>
+          <span style="color: var(--white);">MY</span><span style="color: var(--accent);">STUDIES</span>
+        </div>
+        <p>منصة رقمية متكاملة تهدف إلى تزويد الطلاب بآخر الأخبار التعليمية، فرص المنح الدراسية، مباريات التوظيف، والتوجيه الدراسي في المغرب والعالم العربي.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="انستغرام"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="لينكد إن"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>الأقسام</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="navigateTo('education')">أخبار التعليم</a></li>
+          <li><a href="#" onclick="navigateTo('scholarships')">المنح الدراسية</a></li>
+          <li><a href="#" onclick="navigateTo('jobs')">مباريات التوظيف</a></li>
+          <li><a href="#" onclick="navigateTo('internships')">فرص التدريب</a></li>
+          <li><a href="#" onclick="navigateTo('guidance')">التوجيه الدراسي</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>روابط مهمة</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="navigateTo('contact')">تواصل معنا</a></li>
+          <li><a href="#">سياسة الخصوصية</a></li>
+          <li><a href="#">الشروط والأحكام</a></li>
+          <li><a href="#">الأكثر قراءة</a></li>
+          <li><a href="#">خريطة الموقع</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>إحصائيات سريعة</h4>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-newspaper"></i> أكثر من 1,250 خبر</a></li>
+          <li><a href="#"><i class="fas fa-award"></i> 340+ منحة دراسية</a></li>
+          <li><a href="#"><i class="fas fa-briefcase"></i> 520+ مباراة توظيف</a></li>
+          <li><a href="#"><i class="fas fa-users"></i> 15,000+ طالب</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة &copy; 2026 MYSTUDIES. منصة الطالب المتكاملة</p>
+    </div>
+  </footer>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay" onclick="closeSearchOutside(event)">
+    <div class="search-panel">
+      <div class="search-panel-inner">
+        <div class="search-input-wrap">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="ابحث عن الأخبار، المنح، الوظائف..." oninput="performSearch(this.value)" autofocus>
+          <button class="search-close" onclick="toggleSearch()"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <!-- Article Modal -->
+  <div class="article-modal" id="articleModal" onclick="closeArticleOutside(event)">
+    <div class="article-modal-content">
+      <button class="article-modal-close" onclick="closeArticle()"><i class="fas fa-times"></i></button>
+      <img class="article-modal-img" id="articleImg" src="" alt="صورة المقال">
+      <div class="article-modal-body">
+        <span class="article-modal-category" id="articleCategory"></span>
+        <h2 id="articleTitle"></h2>
+        <div class="article-modal-meta">
+          <span><i class="far fa-calendar"></i> <span id="articleDate"></span></span>
+          <span><i class="far fa-user"></i> <span id="articleSource"></span></span>
+        </div>
+        <div class="ai-summary" id="aiSummary">
+          <div class="ai-summary-label"><i class="fas fa-brain"></i> ملخص ذكي</div>
+          <div class="ai-summary-text" id="aiSummaryText"></div>
+        </div>
+        <div class="article-modal-text" id="articleText"></div>
+        <div class="ad-container ad-inarticle" style="margin:16px 0;min-height:90px;"></div>
+      </div>
+      <div class="article-actions-bar">
+        <button class="btn-share" onclick="shareArticle()"><i class="fas fa-share-alt"></i> مشاركة</button>
+        <button class="btn-save" onclick="saveArticle()"><i class="far fa-bookmark"></i> حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Assistant -->
+  <div class="ai-assistant">
+    <button class="ai-assistant-btn" id="aiBtn" onclick="toggleAiAssistant()" aria-label="المساعد الذكي">
+      <i class="fas fa-robot"></i>
+    </button>
+    <div class="ai-assistant-panel" id="aiPanel">
+      <div class="ai-assistant-header">
+        <h4><i class="fas fa-brain"></i> المساعد الذكي</h4>
+        <button class="ai-assistant-close" onclick="toggleAiAssistant()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="ai-assistant-body" id="aiMessages">
+        <div class="ai-message bot">👋 مرحباً! أنا المساعد الذكي لـ MYSTUDIES. يمكنني مساعدتك في البحث عن الأخبار، اقتراح محتوى يناسب اهتماماتك، أو تلخيص المقالات. كيف يمكنني مساعدتك؟</div>
+      </div>
+      <div class="ai-assistant-input">
+        <input type="text" id="aiInput" placeholder="اكتب سؤالك..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+        <button onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/ads.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

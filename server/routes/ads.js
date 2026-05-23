@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getDB, save } = require('../db');
-const { auth } = require('../middleware/auth');
+const { authMiddleware } = require('../middleware/auth');
 
 // Default ad settings
 function defaultAdSettings() {
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 });
 
 // PUT /api/ads - update ad settings (admin only)
-router.put('/', auth, (req, res) => {
+router.put('/', authMiddleware, (req, res) => {
   const db = getDB();
   db.ads_settings = { ...defaultAdSettings(), ...req.body };
   save();

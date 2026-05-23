@@ -11,7 +11,7 @@ function getDefaultData() {
       { id: 1, slug: 'education', name_ar: 'أخبار التعليم', icon: 'fa-graduation-cap', color: 'primary', created_at: new Date().toISOString() },
       { id: 2, slug: 'scholarship', name_ar: 'المنح الدراسية', icon: 'fa-award', color: 'accent', created_at: new Date().toISOString() },
       { id: 3, slug: 'job', name_ar: 'مباريات التوظيف', icon: 'fa-briefcase', color: 'danger', created_at: new Date().toISOString() },
-      { id: 4, slug: 'internship', name_ar: 'فرص التدريب', icon: 'fa-laptop-code', color: 'success', created_at: new Date().toISOString() },
+      { id: 4, slug: 'immigration', name_ar: 'فرص الهجرة', icon: 'fa-plane', color: 'info', created_at: new Date().toISOString() },
       { id: 5, slug: 'guidance', name_ar: 'التوجيه الدراسي', icon: 'fa-compass', color: 'purple', created_at: new Date().toISOString() }
     ],
     news: [],

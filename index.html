@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MYSTUDIES - منصة تعليمية وأخبارية للطلاب: أخبار التعليم، المنح الدراسية، مباريات التوظيف، فرص التدريب والتوجيه الدراسي">
-  <meta name="keywords" content="أخبار التعليم, منح دراسية, مباريات التوظيف, تدريب, توجيه دراسي, المغرب, طلاب">
+  <meta name="description" content="MYSTUDIES - منصة تعليمية وأخبارية للطلاب: أخبار التعليم، المنح الدراسية، مباريات التوظيف، فرص الهجرة والتوجيه الدراسي">
+  <meta name="keywords" content="أخبار التعليم, منح دراسية, مباريات التوظيف, هجرة, توجيه دراسي, المغرب, طلاب">
   <meta name="author" content="MYSTUDIES">
   <meta property="og:title" content="MYSTUDIES - منصة الطالب المتكاملة">
   <meta property="og:description" content="أخبار التعليم، المنح الدراسية، مباريات التوظيف، والتوجيه الدراسي">
@@ -28,7 +28,7 @@
         <a href="#" data-page="education"><i class="fas fa-graduation-cap"></i> أخبار التعليم</a>
         <a href="#" data-page="scholarships"><i class="fas fa-award"></i> المنح الدراسية</a>
         <a href="#" data-page="jobs"><i class="fas fa-briefcase"></i> مباريات التوظيف</a>
-        <a href="#" data-page="internships"><i class="fas fa-laptop-code"></i> فرص التدريب</a>
+        <a href="#" data-page="immigration"><i class="fas fa-plane"></i> فرص الهجرة</a>
         <a href="#" data-page="guidance"><i class="fas fa-compass"></i> التوجيه الدراسي</a>
         <a href="#" data-page="contact"><i class="fas fa-envelope"></i> تواصل معنا</a>
       </nav>
@@ -52,7 +52,7 @@
       <span class="cat-strip-item" onclick="filterCategory('education')"><i class="fas fa-graduation-cap"></i> تعليم</span>
       <span class="cat-strip-item" onclick="filterCategory('scholarship')"><i class="fas fa-award"></i> منح</span>
       <span class="cat-strip-item" onclick="filterCategory('job')"><i class="fas fa-briefcase"></i> وظائف</span>
-      <span class="cat-strip-item" onclick="filterCategory('internship')"><i class="fas fa-laptop-code"></i> تدريب</span>
+      <span class="cat-strip-item" onclick="filterCategory('immigration')"><i class="fas fa-plane"></i> هجرة</span>
       <span class="cat-strip-item" onclick="filterCategory('guidance')"><i class="fas fa-compass"></i> توجيه</span>
     </div>
   </div>
@@ -62,7 +62,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <h1>منصتك المتكاملة <span>للطلاب</span></h1>
-        <p>أخبار التعليم، المنح الدراسية، مباريات التوظيف، فرص التدريب، ونصائح التوجيه الدراسي في مكان واحد</p>
+        <p>أخبار التعليم، المنح الدراسية، مباريات التوظيف، فرص الهجرة، ونصائح التوجيه الدراسي في مكان واحد</p>
         <div class="hero-buttons">
           <a href="#" class="btn btn-primary" onclick="navigateTo('education')"><i class="fas fa-graduation-cap"></i> أحدث الأخبار</a>
           <a href="#" class="btn btn-outline" onclick="navigateTo('scholarships')"><i class="fas fa-award"></i> المنح الدراسية</a>
@@ -192,19 +192,19 @@
       <div class="news-grid" id="jobsGrid"></div>
     </div>
 
-    <div id="page-internships" class="category-page">
+    <div id="page-immigration" class="category-page">
       <div class="category-header">
         <div>
-          <h2><i class="fas fa-laptop-code"></i> فرص التدريب</h2>
-          <p>فرص التدريب المهني والصيفي للطلاب والخريجين</p>
+          <h2><i class="fas fa-plane"></i> فرص الهجرة</h2>
+          <p>فرص الهجرة والدراسة والعمل في كندا وأوروبا</p>
         </div>
         <div class="filter-bar">
-          <button class="filter-btn active" onclick="filterSubCategory('internships', 'all')">الكل</button>
-          <button class="filter-btn" onclick="filterSubCategory('internships', 'صيفي')">تدريب صيفي</button>
-          <button class="filter-btn" onclick="filterSubCategory('internships', 'مهني')">تدريب مهني</button>
+          <button class="filter-btn active" onclick="filterSubCategory('immigration', 'all')">الكل</button>
+          <button class="filter-btn" onclick="filterSubCategory('immigration', 'كندا')">كندا</button>
+          <button class="filter-btn" onclick="filterSubCategory('immigration', 'أوروبا')">أوروبا</button>
         </div>
       </div>
-      <div class="news-grid" id="internshipsGrid"></div>
+      <div class="news-grid" id="immigrationGrid"></div>
     </div>
 
     <div id="page-guidance" class="category-page">
@@ -332,7 +332,7 @@
           <li><a href="#" onclick="navigateTo('education')">أخبار التعليم</a></li>
           <li><a href="#" onclick="navigateTo('scholarships')">المنح الدراسية</a></li>
           <li><a href="#" onclick="navigateTo('jobs')">مباريات التوظيف</a></li>
-          <li><a href="#" onclick="navigateTo('internships')">فرص التدريب</a></li>
+          <li><a href="#" onclick="navigateTo('immigration')">فرص الهجرة</a></li>
           <li><a href="#" onclick="navigateTo('guidance')">التوجيه الدراسي</a></li>
         </ul>
       </div>

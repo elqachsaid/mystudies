@@ -14,8 +14,8 @@ const KEYWORD_FEEDS = [
   { keywords: 'تشغيل المغرب fonction publique', category_slug: 'job', source_name: 'Google News - وظائف' },
   { keywords: 'أخبار التعليم المغرب', category_slug: 'education', source_name: 'Google News - تعليم' },
   { keywords: 'وزارة التربية الوطنية المغرب', category_slug: 'education', source_name: 'Google News - تعليم' },
-  { keywords: 'التدريب المهني المغرب', category_slug: 'internship', source_name: 'Google News - تدريب' },
-  { keywords: 'فرص التدريب المغرب stages', category_slug: 'internship', source_name: 'Google News - تدريب' },
+  { keywords: 'فرص الهجرة كندا 2026', category_slug: 'immigration', source_name: 'Google News - هجرة' },
+  { keywords: 'الهجرة إلى أوروبا المغرب', category_slug: 'immigration', source_name: 'Google News - هجرة' },
   { keywords: 'التوجيه الدراسي المغرب', category_slug: 'guidance', source_name: 'Google News - توجيه' },
   { keywords: 'امتحانات البكالوريا المغرب', category_slug: 'education', source_name: 'Google News - امتحانات' }
 ];

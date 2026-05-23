@@ -183,7 +183,7 @@ function getPlaceholder(category) {
     education: '1a56db',
     scholarship: 'f59e0b',
     job: 'ef4444',
-    internship: '10b981',
+    immigration: '1ca3a7',
     guidance: '7c3aed'
   };
   const color = colors[category] || '1a56db';
@@ -270,7 +270,7 @@ function filterCategory(cat) {
     renderHomeNews();
     return;
   }
-  const pageMap = { education: 'education', scholarship: 'scholarships', job: 'jobs', internship: 'internships', guidance: 'guidance' };
+  const pageMap = { education: 'education', scholarship: 'scholarships', job: 'jobs', immigration: 'immigration', guidance: 'guidance' };
   const page = pageMap[cat];
   if (page) navigateTo(page);
 }
@@ -314,15 +314,15 @@ function getAiReply(msg) {
     const count = allNews.filter(a => a.category === 'job').length;
     return `💼 يتوفر <strong>${count}</strong> إعلان توظيف. تصفح قسم "مباريات التوظيف" للمزيد من التفاصيل. هل هناك مجال معين يهمك؟`;
   }
-  if (q.includes('تدريب') || q.includes('stage') || q.includes('internship')) {
-    const count = allNews.filter(a => a.category === 'internship').length;
-    return `📋 يوجد <strong>${count}</strong> فرصة تدريب متاحة. تفقد قسم "فرص التدريب" للمزيد.`;
+  if (q.includes('هجرة') || q.includes('كندا') || q.includes('أوروبا') || q.includes('سفر') || q.includes('immigration')) {
+    const count = allNews.filter(a => a.category === 'immigration').length;
+    return `✈️ يوجد <strong>${count}</strong> فرصة هجرة متاحة. تفقد قسم "فرص الهجرة" للمزيد.`;
   }
   if (q.includes('توجيه') || q.includes('اختيار تخصص') || q.includes('جامعة')) {
     return `🧭 يمكنك الاطلاع على قسم "التوجيه الدراسي" للحصول على نصائح وإرشادات حول اختيار التخصص والمسارات الدراسية. هل لديك سؤال محدد عن التوجيه؟`;
   }
   if (q.includes('سلام') || q.includes('مرحبا') || q.includes('hello') || q.includes('hi')) {
-    return `👋 مرحباً بك في MYSTUDIES! كيف يمكنني مساعدتك اليوم؟ يمكنني: \n• البحث عن أخبار التعليم\n• عرض المنح الدراسية المتاحة\n• اقتراح فرص التدريب\n• تقديم نصائح التوجيه`;
+    return `👋 مرحباً بك في MYSTUDIES! كيف يمكنني مساعدتك اليوم؟ يمكنني: \n• البحث عن أخبار التعليم\n• عرض المنح الدراسية المتاحة\n• عرض فرص الهجرة\n• تقديم نصائح التوجيه`;
   }
   if (q.includes('أخبار') || q.includes('جديد') || q.includes('مستجدات')) {
     const latest = allNews.slice(0, 3);
@@ -331,7 +331,7 @@ function getAiReply(msg) {
   if (q.includes('شكر') || q.includes('thanks')) {
     return '🙏 العفو! دائماً في الخدمة. هل هناك شيء آخر يمكنني مساعدتك به؟';
   }
-  return `🤔 شكراً على سؤالك! يمكنني مساعدتك في:\n• البحث عن المنح الدراسية 🎓\n• مباريات التوظيف 💼\n• فرص التدريب 📋\n• التوجيه الدراسي 🧭\n• آخر الأخبار 📰\n\nما الذي تريد معرفته بالتحديد؟`;
+  return `🤔 شكراً على سؤالك! يمكنني مساعدتك في:\n• البحث عن المنح الدراسية 🎓\n• مباريات التوظيف 💼\n• فرص الهجرة ✈️\n• التوجيه الدراسي 🧭\n• آخر الأخبار 📰\n\nما الذي تريد معرفته بالتحديد؟`;
 }
 
 // ===== Contact Form =====
@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(animateCounters, 500);
   startAutoUpdate();
   // Initialize all category pages
-  ['education', 'scholarships', 'jobs', 'internships', 'guidance'].forEach(page => {
+  ['education', 'scholarships', 'jobs', 'immigration', 'guidance'].forEach(page => {
     renderCategoryGrid(page);
   });
   // Try fetching news from RSS sources (frontend)

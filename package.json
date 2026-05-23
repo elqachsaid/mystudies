@@ -1,0 +1,10 @@
+{
+  "name": "mystudies",
+  "version": "1.0.0",
+  "description": "MYSTUDIES - منصة الطالب المتكاملة",
+  "scripts": {
+    "install": "cd server && npm install",
+    "build": "cd server && npm install",
+    "start": "cd server && node server.js"
+  }
+}

@@ -20,6 +20,7 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/rss', require('./routes/rss'));
 app.use('/api/subscribers', require('./routes/subscribers'));
+app.use('/api/ads', require('./routes/ads'));
 
 // Stats endpoint
 app.get('/api/stats', (req, res) => {

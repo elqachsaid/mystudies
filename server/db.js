@@ -18,6 +18,7 @@ function getDefaultData() {
     contacts: [],
     subscribers: [],
     saved_articles: [],
+    ads_settings: { network: 'custom', adsense: { publisher_id: 'pub-0000000000000000', slot_header: '', slot_sidebar: '', slot_inarticle: '', slot_footer: '' }, propeller: { zone_id: '' }, custom: { header: '', sidebar: '', inarticle: '', footer: '' }, display: { header_enabled: true, sidebar_enabled: true, inarticle_enabled: true, footer_enabled: false } },
     nextId: { users: 2, categories: 6, news: 1, contacts: 1, subscribers: 1, saved_articles: 1 }
   };
 }

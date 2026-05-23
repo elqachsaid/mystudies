@@ -59,7 +59,7 @@ function navigateAdmin(page) {
   document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
   const link = document.querySelector(`.sidebar-nav a[onclick*="'${page}'"]`);
   if (link) link.classList.add('active');
-  const titles = { dashboard: 'لوحة الإحصائيات', news: 'إدارة الأخبار', categories: 'التصنيفات', contacts: 'الرسائل', subscribers: 'المشتركون', rss: 'مصادر RSS', profile: 'الملف الشخصي' };
+  const titles = { dashboard: 'لوحة الإحصائيات', news: 'إدارة الأخبار', categories: 'التصنيفات', contacts: 'الرسائل', subscribers: 'المشتركون', rss: 'مصادر RSS', ads: 'إدارة الإعلانات', profile: 'الملف الشخصي' };
   document.getElementById('pageTitle').textContent = titles[page] || page;
   const content = document.getElementById('adminContent');
   if (page === 'dashboard') renderDashboard(content);
@@ -68,6 +68,7 @@ function navigateAdmin(page) {
   else if (page === 'contacts') renderContacts(content);
   else if (page === 'subscribers') renderSubscribers(content);
   else if (page === 'rss') renderRssManager(content);
+  else if (page === 'ads') renderAdsSettings(content);
   else if (page === 'profile') renderProfile(content);
 }
 
@@ -614,6 +615,111 @@ async function fetchRssNow() {
     const data = await res.json();
     showToast(data.message || 'تم الجلب', 'success');
   } catch(e) { showToast('فشل جلب الأخبار', 'error'); }
+}
+
+// ===== Ads Management =====
+async function renderAdsSettings(el) {
+  el.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div>';
+  try {
+    const res = await fetch(API + '/ads');
+    const s = await res.json();
+    el.innerHTML = `
+      <div class="form-card">
+        <h3><i class="fas fa-ad"></i> إعدادات الإعلانات</h3>
+        <form id="adsForm" onsubmit="saveAdSettings(event)">
+          <div class="form-group">
+            <label>شبكة الإعلانات</label>
+            <select name="network" onchange="toggleAdNetwork(this.value)">
+              <option value="adsense" ${s.network==='adsense'?'selected':''}>Google AdSense</option>
+              <option value="propeller" ${s.network==='propeller'?'selected':''}>PropellerAds</option>
+              <option value="custom" ${s.network==='custom'?'selected':''}>إعلانات مخصصة (HTML)</option>
+            </select>
+          </div>
+
+          <div id="adsenseFields" style="${s.network!=='adsense'?'display:none':''}">
+            <h4 style="margin:20px 0 12px;color:var(--primary)">Google AdSense</h4>
+            <div class="form-group"><label>معرف الناشر (pub-xxx)</label><input name="adsense_publisher_id" value="${s.adsense.publisher_id}" placeholder="pub-0000000000000000"></div>
+            <div class="form-row">
+              <div class="form-group"><label>Header Slot</label><input name="adsense_slot_header" value="${s.adsense.slot_header||''}" placeholder="1234567890"></div>
+              <div class="form-group"><label>Sidebar Slot</label><input name="adsense_slot_sidebar" value="${s.adsense.slot_sidebar||''}" placeholder="1234567890"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>In-Article Slot</label><input name="adsense_slot_inarticle" value="${s.adsense.slot_inarticle||''}" placeholder="1234567890"></div>
+              <div class="form-group"><label>Footer Slot</label><input name="adsense_slot_footer" value="${s.adsense.slot_footer||''}" placeholder="1234567890"></div>
+            </div>
+          </div>
+
+          <div id="propellerFields" style="${s.network!=='propeller'?'display:none':''}">
+            <h4 style="margin:20px 0 12px;color:var(--accent)">PropellerAds</h4>
+            <div class="form-group"><label>Zone ID</label><input name="propeller_zone_id" value="${s.propeller.zone_id||''}" placeholder="000000"></div>
+          </div>
+
+          <div id="customFields" style="${s.network!=='custom'?'display:none':''}">
+            <h4 style="margin:20px 0 12px;color:var(--success)">إعلانات مخصصة (HTML)</h4>
+            <div class="form-group"><label>كود الإعلان - رأس الموقع</label><textarea name="custom_header" rows="3" placeholder="ضع كود HTML هنا">${s.custom.header||''}</textarea></div>
+            <div class="form-group"><label>كود الإعلان - الشريط الجانبي</label><textarea name="custom_sidebar" rows="3" placeholder="ضع كود HTML هنا">${s.custom.sidebar||''}</textarea></div>
+            <div class="form-group"><label>كود الإعلان - داخل المقال</label><textarea name="custom_inarticle" rows="3" placeholder="ضع كود HTML هنا">${s.custom.inarticle||''}</textarea></div>
+            <div class="form-group"><label>كود الإعلان - الفوتر</label><textarea name="custom_footer" rows="3" placeholder="ضع كود HTML هنا">${s.custom.footer||''}</textarea></div>
+          </div>
+
+          <h4 style="margin:24px 0 12px">أماكن الظهور</h4>
+          <div class="form-row" style="flex-wrap:wrap;gap:16px">
+            <label class="switch"><input type="checkbox" name="header_enabled" ${s.display.header_enabled?'checked':''}><span class="slider"></span> رأس الموقع</label>
+            <label class="switch"><input type="checkbox" name="sidebar_enabled" ${s.display.sidebar_enabled?'checked':''}><span class="slider"></span> الشريط الجانبي</label>
+            <label class="switch"><input type="checkbox" name="inarticle_enabled" ${s.display.inarticle_enabled?'checked':''}><span class="slider"></span> داخل المقال</label>
+            <label class="switch"><input type="checkbox" name="footer_enabled" ${s.display.footer_enabled?'checked':''}><span class="slider"></span> الفوتر</label>
+          </div>
+
+          <div class="form-actions" style="margin-top:24px">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ الإعدادات</button>
+          </div>
+        </form>
+      </div>
+    `;
+  } catch(e) { el.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>خطأ في التحميل</h3></div>'; }
+}
+
+function toggleAdNetwork(network) {
+  document.getElementById('adsenseFields').style.display = network === 'adsense' ? '' : 'none';
+  document.getElementById('propellerFields').style.display = network === 'propeller' ? '' : 'none';
+  document.getElementById('customFields').style.display = network === 'custom' ? '' : 'none';
+}
+
+async function saveAdSettings(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  const settings = {
+    network: data.get('network'),
+    adsense: {
+      publisher_id: data.get('adsense_publisher_id') || 'pub-0000000000000000',
+      slot_header: data.get('adsense_slot_header') || '',
+      slot_sidebar: data.get('adsense_slot_sidebar') || '',
+      slot_inarticle: data.get('adsense_slot_inarticle') || '',
+      slot_footer: data.get('adsense_slot_footer') || ''
+    },
+    propeller: { zone_id: data.get('propeller_zone_id') || '' },
+    custom: {
+      header: data.get('custom_header') || '',
+      sidebar: data.get('custom_sidebar') || '',
+      inarticle: data.get('custom_inarticle') || '',
+      footer: data.get('custom_footer') || ''
+    },
+    display: {
+      header_enabled: data.get('header_enabled') === 'on',
+      sidebar_enabled: data.get('sidebar_enabled') === 'on',
+      inarticle_enabled: data.get('inarticle_enabled') === 'on',
+      footer_enabled: data.get('footer_enabled') === 'on'
+    }
+  };
+  try {
+    const res = await fetch(API + '/ads', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + TOKEN },
+      body: JSON.stringify(settings)
+    });
+    if (!res.ok) { showToast('فشل الحفظ', 'error'); return; }
+    showToast('تم حفظ إعدادات الإعلانات', 'success');
+  } catch(e) { showToast('فشل الاتصال', 'error'); }
 }
 
 // ===== Profile =====

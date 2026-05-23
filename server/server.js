@@ -76,6 +76,12 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 app.use(express.static(path.join(__dirname, '..')));
 
 // SPA fallback
+app.get('/privacy-policy', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'privacy-policy.html'));
+});
+app.get('/terms', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'terms.html'));
+});
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api/')) {
     return res.status(404).json({ error: 'الرابط غير موجود' });
